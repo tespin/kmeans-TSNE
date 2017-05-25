@@ -39,9 +39,9 @@ void ofApp::setup()
         return;
     }
 
-    nx = 8;
-    ny = 8;
-    nz = 8;
+    nx = 12;
+    ny = 7;
+    nz = 7;
     
     w = 256;
     h = 256;
@@ -150,14 +150,15 @@ void ofApp::setup()
         posVector.push_back(pos);
     }
     
-    // populate meshes with verts
     for (int i = 0; i < elementVector.size(); i++)
     {
         elementVector[i].setVertex(posVector[i]);
     }
     
+    cam.setAutoDistance(false);
     cam.setNearClip(0.1);
     cam.setFarClip(50000);
+    cam.setPosition((nx-0.5) * w, (ny-0.5) * h, (nz+15) * d);
     
     sphere.setRadius(50);
     
@@ -167,14 +168,22 @@ void ofApp::setup()
 
 void ofApp::update()
 {
-    
+    // reset camera to nondefault position -- better to implement virtual method
+    ofVec3f camPos = cam.getPosition();
+    ofVec3f defaultPos = ofVec3f(0, 0, cam.getDistance());
+    if (camPos == defaultPos)
+    {
+        cam.setPosition((nx-0.5) * w, (ny-0.5) * h, (nz+15) * d);
+    }
 }
 
 void ofApp::draw()
 {
-    ofBackground(0);
+    ofBackground(255);
     cam.begin();
     ofEnableDepthTest();
+    
+    ofSetColor(0);
     
     for (int i = 0; i < elementVector.size(); i++)
     {

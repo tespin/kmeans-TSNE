@@ -8,9 +8,11 @@
 #include "ofxGui.h"
 #include "Element.h"
 
+#define NUMIMAGES 588
+#define NUMCLUSTERS 6
 
-#define NUMIMAGES 512
-#define NUMCLUSTERS 5
+//#define NUMIMAGES 512
+//#define NUMCLUSTERS 5
 
 struct ClusterGui
 {
