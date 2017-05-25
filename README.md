@@ -7,6 +7,7 @@ This uses the *master* branches of the following addons:
 * [ofxCcv](https://github.com/kylemcdonald/ofxCcv "ofxCcv")
 * [ofxLearn](https://github.com/genekogan/ofxLearn "ofxLearn")
 * [ofxAssignment](https://github.com/kylemcdonald/ofxAssignment "ofxAssignment")
+* ofxGui (core addon for openFrameworks)
 
 ## Examples
 ### 3D Assigned Images
