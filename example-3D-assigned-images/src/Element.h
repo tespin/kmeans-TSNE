@@ -14,12 +14,15 @@ class Element
     {
     public:
         
-        void assignClusterIndex(int _clusterIndex);
+        void assignClusterIndex(int& _clusterIndex);
         int getClusterIndex();
         
-        void setVertex(ofVec3f _vertex);
+        void setVertex(ofVec3f& _vertex);
         ofVec3f getVertex();
         
         int clusterIndex;
         ofVec3f vertex;
+        
+        void setImage (ofImage& _image);
+        ofImage image;
 };

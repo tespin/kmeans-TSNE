@@ -8,7 +8,7 @@
 
 #include "Element.h"
 
-void Element::assignClusterIndex(int _clusterIndex)
+void Element::assignClusterIndex(int& _clusterIndex)
 {
     clusterIndex = _clusterIndex;
 }
@@ -18,7 +18,7 @@ int Element::getClusterIndex()
     return clusterIndex;
 }
 
-void Element::setVertex(ofVec3f _vertex)
+void Element::setVertex(ofVec3f& _vertex)
 {
     vertex = _vertex;
 }
@@ -26,4 +26,9 @@ void Element::setVertex(ofVec3f _vertex)
 ofVec3f Element::getVertex()
 {
     return vertex;
+}
+
+void Element::setImage(ofImage& _image)
+{
+    image = _image;
 }
