@@ -24,4 +24,4 @@ This uses the *master* branches of the following addons:
 * Add a 'Use' section' in readme.
 * Write out encodings to a data file that can be read from to reduce iteration time.
 * Refine data structures, memory management, const-ify some methods.
-
+* Constrain random colors so that they are not equal / close to each other or the background color. 
