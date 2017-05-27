@@ -66,26 +66,20 @@ void ofApp::setup()
         return;
     }
     
+    for (int i = 0; i < NUMIMAGES; i++)
+    {
+        Element element;
+        elementVector.push_back(element);
+    }
+    
     // load images
     for (int i = 0; i < NUMIMAGES; i++)
     {
         if (i % 20 == 0) ofLog() << " - loading image " << i << " / " << nx * ny * nz << " (" << dir.size() << " in dir)";
         images.push_back(ofImage());
         images.back().load(imageFiles[i].getAbsolutePath());
-    }
-    
-    // resize images to w x h
-    for (int i = 0; i < images.size(); i++)
-    {
-        if (images[i].getWidth() > images[i].getHeight())
-        {
-            images[i].crop((images[i].getWidth()-images[i].getHeight()) * 0.5, 0, images[i].getHeight(), images[i].getHeight());
-        }
-        else if (images[i].getHeight() > images[i].getWidth())
-        {
-            images[i].crop(0, (images[i].getHeight()-images[i].getWidth()) * 0.5, images[i].getWidth(), images[i].getWidth());
-        }
-        images[i].resize(w, h);
+        
+        elementVector[i].setImage(images[i], w, h);
     }
     
     // setup ccv
@@ -126,12 +120,7 @@ void ofApp::setup()
     // assign each instance to a cluster
     for (int i = 0; i < clusters.size(); i++)
     {
-        Element element;
-        element.assignClusterIndex(clusters[i]);
-        
-        elementVector.push_back(element);
-        
-        //    cout << "Element " << ofToString(i) << " " << ofToString(instances[i]) << " assigned to cluster " << ofToString(clusters[i]) << endl;
+        elementVector[i].assignClusterIndex(clusters[i]);
     }
     
     for (int i = 0; i < NUMCLUSTERS; i++)
@@ -168,7 +157,7 @@ void ofApp::setup()
 
 void ofApp::update()
 {
-    // reset camera to nondefault position -- better to implement virtual method
+    // reset camera to nondefault position -- better to implement virtual method in ofCamera
     ofVec3f camPos = cam.getPosition();
     ofVec3f defaultPos = ofVec3f(0, 0, cam.getDistance());
     if (camPos == defaultPos)
@@ -192,13 +181,13 @@ void ofApp::draw()
         if (clustersGui[specifiedCluster].drawImages)
         {
             ofSetColor(255, 255, 255);
-            images[i].draw(posVector[i], images[i].getWidth(), images[i].getHeight());
+            elementVector[i].getImage().draw(posVector[i], elementVector[i].getImage().getWidth(), elementVector[i].getImage().getWidth());
         }
         
         if (clustersGui[specifiedCluster].drawPointCloud)
         {
             ofSetColor(colors[clusters[i]]);
-            sphere.setPosition(posVector[i].x + (images[i].getWidth() / 2), posVector[i].y + (images[i].getHeight() / 2), posVector[i].z);
+            sphere.setPosition(posVector[i].x + (elementVector[i].getImage().getWidth() / 2), posVector[i].y + (elementVector[i].getImage().getHeight() / 2), posVector[i].z);
             sphere.draw();
         }
     }

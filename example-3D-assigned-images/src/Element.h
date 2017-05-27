@@ -20,9 +20,11 @@ class Element
         void setVertex(ofVec3f& _vertex);
         ofVec3f getVertex();
         
+        void setImage(ofImage& _image, int _w, int _h);
+        ofImage& getImage();
+        
         int clusterIndex;
         ofVec3f vertex;
-        
-        void setImage (ofImage& _image);
         ofImage image;
+        
 };
