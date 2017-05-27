@@ -17,3 +17,11 @@ This uses the *master* branches of the following addons:
 ## Examples
 ### 3D Assigned Images
 ![3D assigned images](https://github.com/tespin/ofxKMeans-TSNE/blob/master/documentation-images/3d-assigned-images/3d-assigned-images-01.png)
+
+## To Do
+* Include examples for unassigned 3D images, and possibly examples using 2D embeddings.
+* Finish documentation for 3D assigned images.
+* Add a 'Use' section' in readme.
+* Write out encodings to a data file that can be read from to reduce iteration time.
+* Refine data structures, memory management, const-ify some methods.
+
