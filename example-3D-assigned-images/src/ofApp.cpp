@@ -30,7 +30,7 @@ void ofApp::setup()
 {
     ofSetVerticalSync(true);
     
-    string imageDir = "";
+    string imageDir = "/Users/tespin/Documents/openFrameworks/apps/myApps/00_BatchFeatureEncoder/bin/data/image-set-a-scanner-darkly-2";
     
     if (imageDir == "")
     {
@@ -66,6 +66,7 @@ void ofApp::setup()
         return;
     }
     
+    // populate element vector
     for (int i = 0; i < NUMIMAGES; i++)
     {
         Element element;
@@ -94,7 +95,7 @@ void ofApp::setup()
         encodings.push_back(encoding);
     }
     
-    // run t-SNE and loage image points to imagePoints
+    // run t-SNE and load image points to imagePoints
     ofLog() << "Run t-SNE on images...";
     tsneVecs = tsne.run(encodings, 3, perplexity, theta, true);
     
@@ -139,6 +140,7 @@ void ofApp::setup()
         posVector.push_back(pos);
     }
     
+    // assign each element its pos
     for (int i = 0; i < elementVector.size(); i++)
     {
         elementVector[i].setVertex(posVector[i]);

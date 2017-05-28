@@ -30,6 +30,7 @@ ofVec3f Element::getVertex()
 
 void Element::setImage(ofImage& _image, int _w, int _h)
 {
+    // resize image here
     if (_image.getWidth() > _image.getHeight())
     {
         _image.crop((_image.getWidth()-_image.getHeight()) * 0.5, 0, _image.getHeight(), _image.getHeight());
@@ -40,19 +41,6 @@ void Element::setImage(ofImage& _image, int _w, int _h)
     }
     
     _image.resize(_w, _h);
-    
-//    for (int i = 0; i < images.size(); i++)
-//    {
-//        if (images[i].getWidth() > images[i].getHeight())
-//        {
-//            images[i].crop((images[i].getWidth()-images[i].getHeight()) * 0.5, 0, images[i].getHeight(), images[i].getHeight());
-//        }
-//        else if (images[i].getHeight() > images[i].getWidth())
-//        {
-//            images[i].crop(0, (images[i].getHeight()-images[i].getWidth()) * 0.5, images[i].getWidth(), images[i].getWidth());
-//        }
-//        images[i].resize(w, h);
-//    }
     
     image = _image;
 }
