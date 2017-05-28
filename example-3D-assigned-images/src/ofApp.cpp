@@ -30,7 +30,7 @@ void ofApp::setup()
 {
     ofSetVerticalSync(true);
     
-    string imageDir = "/Users/tespin/Documents/openFrameworks/apps/myApps/00_BatchFeatureEncoder/bin/data/image-set-a-scanner-darkly-2";
+    string imageDir = "";
     
     if (imageDir == "")
     {
