@@ -4,11 +4,11 @@ A version of ofxTSNE using k-means clustering and containing examples with 3D em
 ## About
 ofxKMeans-TSNE is a tool written with openFrameworks integrating [k-means](https://projecteuclid.org/download/pdf_1/euclid.bsmsp/1200512992 "Some Methods for classification and Analysis of Multivariate Observations") clustering with [t-SNE](https://lvdmaaten.github.io/publications/papers/JMLR_2008.pdf "Visualizing Data using t-SNE") data.
 
-t-SNE is a dimensionality reducing algorithm that facilitates the visualization of high-dimensional data by mapping each element to a location on a two or three-dimensional plot. Although visually, it's easy to distinguish one group of points from another, the groups carry no semantic meaning and cannot be directly accessed as a cluster. To work with this data beyond a simple visualization, one might want to iterate through all the points and delineate boundaries, looking at each element and assigning it to a particular cluster. ofxKMeans-TSNE does this by adding the raw t-SNE data from ofxTSNE to a k-means clusterer from ofxLearn.
+t-SNE is a dimensionality reducing algorithm that facilitates the visualization of high-dimensional data by mapping each element to a location on a two or three-dimensional plot. Although it's easy to visually distinguish one group of points from another, the groups carry no semantic meaning and cannot be directly accessed as a cluster. To address this, one might want to iterate through all the points and delineate boundaries, looking at each element and assigning it to a particular cluster. ofxKMeans-TSNE does this by adding the raw t-SNE data from ofxTSNE to a k-means clusterer from ofxLearn.
 
 ## Requirements
 1) **Your own set of images.** Scrape them online or use the ones from your last vacation! The available example uses an image sequence from the film *A Scanner Darkly*.  If you don't have an image set readily available, ofxTSNE contains a python script that will download images from an existing database.
-2) **openFrameworks and respective addons.** This has been tested and is working with [openFrameworks](https://openframeworks.cc/download "openFrameworks") 0.9.8. Download the latest stable release, along with the *master* branches of the following addons:
+2) **openFrameworks and the addons listed below.** This has been tested and is working with [openFrameworks](https://openframeworks.cc/download "openFrameworks") 0.9.8. Download the latest stable release, along with the *master* branches of the following addons:
 * [ofxTSNE](https://github.com/genekogan/ofxTSNE "ofxTSNE")
 * [ofxCcv](https://github.com/kylemcdonald/ofxCcv "ofxCcv")
 * [ofxLearn](https://github.com/genekogan/ofxLearn "ofxLearn")
