@@ -18,7 +18,7 @@ t-SNE is a dimensionality reducing algorithm that facilitates the visualization 
 ## Use
 1) Clone the master branches of the above repositories into your `/openFrameworks/addons` directory.
 2) Clone this repository where it is most convenient for you.
-3) Using `projectGenerator`, import this repository and click **Update** to generate the project files.
+3) Using `projectGenerator`, import the example and click **Update** to generate the project files.
 4) Download the image net classifier with `./download-imagenet.sh` (can also copy and paste if the files are already downloaded from using ofxCcv).
 
 ## Examples
