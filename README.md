@@ -24,14 +24,6 @@ t-SNE is a dimensionality reducing algorithm that facilitates the visualization 
 ## Examples
 ### 3D Assigned Images
 ![3D assigned images](https://github.com/tespin/ofxKMeans-TSNE/blob/master/documentation-images/3d-assigned-images/3d-assigned-images-01.png)
-With `example-3D-assigned-images`, images are put through a trained convolutional neural network, becoming encoded as a 4096-dimension feature vector. After being encoded, the t-SNE algorithm 'groups' them together before applying k-means clustering, at which point each element is formally assigned to a cluster. Each image is then assigned to a point in a 3D grid. 
+In `example-3D-assigned-images`, images are put through a trained convolutional neural network and are encoded as a 4096-dimension feature vector. After being encoded, the t-SNE algorithm 'groups' them together before applying k-means clustering, at which point each element is formally assigned to a cluster. Each image is then assigned to a point in a 3D grid. 
 
-The example is initialized to use 588 images (`NUMIMAGES`) and 6 clusters (`NUMCLUSTERS`), with grid dimensions of 12 x 7 x 7 (corresponding to `nx`, `ny`, and `nz`). Feel free to play around with these values.
-
-## To Do
-* Include examples for unassigned 3D images, and possibly examples using 2D embeddings.
-* Finish documentation for 3D assigned images.
-* Write out encodings to a data file that can be read from to reduce iteration time.
-* Refine data structures, memory management, const-ify some methods.
-* Constrain random colors so that they are not equal / close to each other or the background color.
-* Fix gui so that it is visible when there are 10+ clusters. 
+The example is initialized to use 588 images (`NUMIMAGES`) and 6 clusters (`NUMCLUSTERS`), with grid dimensions of 12 x 7 x 7 (corresponding to `nx`, `ny`, and `nz`). Feel free to play around with these values. 
