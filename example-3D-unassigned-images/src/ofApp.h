@@ -8,11 +8,11 @@
 #include "ofxGui.h"
 #include "Element.h"
 
-#define NUMIMAGES 588
-#define NUMCLUSTERS 6
+//#define NUMIMAGES 1600
+//#define NUMCLUSTERS 15
 
-//#define NUMIMAGES 512
-//#define NUMCLUSTERS 5
+#define NUMIMAGES 512
+#define NUMCLUSTERS 5
 
 struct ClusterGui
 {
@@ -33,6 +33,7 @@ public:
     void drawGui();
     
     void scan_dir_imgs(ofDirectory dir);
+    void calcCamPos();
     
     std::vector<ClusterGui> clustersGui;
     
@@ -59,7 +60,7 @@ public:
     
     ofSpherePrimitive sphere;
     
-    int nx, ny, nz;
+    ofVec3f camPos;
     int w, h, d;
     float perplexity, theta;
     float scale;

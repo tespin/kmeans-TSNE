@@ -39,10 +39,6 @@ void ofApp::setup()
         return;
     }
     
-    nx = 12;
-    ny = 7;
-    nz = 7;
-    
     w = 256;
     h = 256;
     d = 256;
@@ -61,7 +57,7 @@ void ofApp::setup()
     // check that there are enough images in directory
     if (imageFiles.size() < NUMIMAGES)
     {
-        ofLog(OF_LOG_ERROR, "There are less images in the directory than the grid size requested (nx*ny*nz="+ofToString((nx*ny*nz))+"). Exiting to save you trouble...");
+        ofLog(OF_LOG_ERROR, "There are less images in the directory than specified (Number of images="+ofToString((NUMIMAGES))+"). Exiting to save you trouble...");
         ofExit(); // not enough images!
         return;
     }
@@ -76,7 +72,7 @@ void ofApp::setup()
     // load images
     for (int i = 0; i < NUMIMAGES; i++)
     {
-        if (i % 20 == 0) ofLog() << " - loading image " << i << " / " << nx * ny * nz << " (" << dir.size() << " in dir)";
+        if (i % 20 == 0) ofLog() << " - loading image " << i << " / " << NUMIMAGES << " (" << dir.size() << " in dir)";
         images.push_back(ofImage());
         images.back().load(imageFiles[i].getAbsolutePath());
         
@@ -125,16 +121,6 @@ void ofApp::setup()
     }
     
     // populate vector of verts
-//    for (int i = 0; i < solvedGrid.size(); i++)
-//    {
-//        float x = scale * (nx - 1) * w * solvedGrid[i].x;
-//        float y = scale * (ny - 1) * h * solvedGrid[i].y;
-//        float z = scale * (nz - 1) * d * solvedGrid[i].z;
-//        
-//        ofVec3f pos(x, y, z);
-//        posVector.push_back(pos);
-//    }
-    
     for (int i = 0; i < tsneVecs.size(); i++)
     {
         float x = ofMap(tsneVecs[i][0], 0, 1, 0, scale * ofGetWidth());
@@ -145,6 +131,8 @@ void ofApp::setup()
         posVector.push_back(pos);
     }
     
+    calcCamPos();
+    
     // assign each element its pos
     for (int i = 0; i < elementVector.size(); i++)
     {
@@ -154,7 +142,7 @@ void ofApp::setup()
     cam.setAutoDistance(false);
     cam.setNearClip(0.1);
     cam.setFarClip(50000);
-    cam.setPosition((nx-0.5) * w, (ny-0.5) * h, (nz+15) * d);
+    cam.setPosition(camPos);
     
     sphere.setRadius(50);
     
@@ -165,11 +153,11 @@ void ofApp::setup()
 void ofApp::update()
 {
     // reset camera to nondefault position -- better to implement virtual method in ofCamera
-    ofVec3f camPos = cam.getPosition();
+    ofVec3f newCamPos = cam.getPosition();
     ofVec3f defaultPos = ofVec3f(0, 0, cam.getDistance());
-    if (camPos == defaultPos)
+    if (newCamPos == defaultPos)
     {
-        cam.setPosition((nx-0.5) * w, (ny-0.5) * h, (nz+15) * d);
+        cam.setPosition(camPos);
     }
 }
 
@@ -234,3 +222,27 @@ void ofApp::drawGui()
     for (int i = 0; i < NUMCLUSTERS; i++) clustersGui[i].gui.draw();
 }
 
+void ofApp::calcCamPos()
+{
+    float maxWidth = posVector[0].x;
+    float minWidth = posVector[0].x;
+    float maxHeight = posVector[0].y;
+    float minHeight = posVector[0].y;
+    float maxDepth = posVector[0].z;
+    float minDepth = posVector[0].z;
+    
+    for (int i = 0; i < posVector.size(); i++)
+    {
+        if (posVector[i].x > maxWidth) maxWidth = posVector[i].x;
+        if (posVector[i].x < minWidth) minWidth = posVector[i].x;
+        if (posVector[i].y > maxHeight) maxHeight = posVector[i].y;
+        if (posVector[i].y < minHeight) minHeight = posVector[i].y;
+        if (posVector[i].z > maxDepth) maxDepth = posVector[i].z;
+        if (posVector[i].z < minDepth) minDepth = posVector[i].z;
+        
+        camPos.x = (minWidth + maxWidth) / 2;
+        camPos.y = (minHeight + maxHeight) / 2;
+        camPos.z = maxDepth + 1500;
+        
+    }
+}
