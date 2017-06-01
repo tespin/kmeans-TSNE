@@ -24,7 +24,7 @@ t-SNE is a dimensionality reducing algorithm that facilitates the visualization 
 ## Examples
 ### 3D Unassigned Images
 ![3D unassigned images](https://github.com/tespin/ofxKMeans-TSNE/blob/master/documentation-images/3d-unassigned-images/3d-unassigned-images-01.png)
-When using the `example-3D-unassigned-images` example, the images are put through a trained convolutional neural network and are encoded as a 4096-dimension feature vector. Then, each element is put through the t-SNE algorithm to be 'grouped' together before k-means clustering is applied. At this point, each element is formally assigned to a cluster.
+When using the `example-3D-unassigned-images` example, the images are put through a trained convolutional neural network and are encoded as a 4096-dimension feature vector. Then, the t-SNE algorithm 'groups' together each image before applying k-means clustering. At this point, each element is formally assigned to a cluster.
 
 `NUMIMAGES` and `NUMCLUSTERS` initializes at 512 images and 5 clusters, but these numbers are arbitrary and can be changed (although I've found that 5-6 clusters corresponds pretty well with this number of images in terms of accuracy).
 
