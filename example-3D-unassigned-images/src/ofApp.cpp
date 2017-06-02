@@ -30,7 +30,7 @@ void ofApp::setup()
 {
     ofSetVerticalSync(true);
     
-    string imageDir = "";
+    string imageDir = "/Users/tespin/Documents/openFrameworks/apps/myApps/00_BatchFeatureEncoder/bin/data/image-set-a-scanner-darkly-2";
     
     if (imageDir == "")
     {
@@ -205,15 +205,68 @@ void ofApp::initGui()
 void ofApp::setupGui()
 {
     // set up every gui
+    int guiColumn = 10;
+    
     for (int i = 0; i < NUMCLUSTERS; i++)
     {
         clustersGui[i].gui.setup();
         clustersGui[i].gui.setName("Cluster: " + ofToString(i+1));
-        
-        clustersGui[i].gui.setPosition(0, clustersGui[i].gui.getHeight() * (i*3));
         clustersGui[i].gui.add(clustersGui[i].drawImages.set("Draw Images", true));
         clustersGui[i].gui.add(clustersGui[i].drawPointCloud.set("Draw Point Cloud",true));
     }
+    
+    if (NUMCLUSTERS > guiColumn)
+    {
+        int row = 0;
+        div_t columns = std::div (NUMCLUSTERS, guiColumn);
+        
+//        if (columns.rem > 0)
+//        {
+//            for (int j = 0; j < columns.quot+1; j++)
+//            {
+//                for (int k = 0; k < guiColumn; k++)
+//                {
+//                    clustersGui[k].gui.setPosition(0, clustersGui[k].gui.getHeight() * k);
+//                }
+//                
+//                for (int l = guiColumn; l < NUMCLUSTERS; l++)
+//                {
+//                    clustersGui[l].gui.setPosition(clustersGui[j].gui.getWidth(), clustersGui[0].gui.getHeight() * j);
+//                }
+//            }
+//        }
+        
+        for (int j = 0; j < guiColumn; j++)
+        {
+            std::cout << "J value: " << ofToString(j) << std::endl;
+            clustersGui[j].gui.setPosition(0, clustersGui[j].gui.getHeight() * j);
+            
+        }
+        
+        for (int k = guiColumn; k < NUMCLUSTERS; k++)
+        {
+//            std::cout << "J value: " << ofToString(row) << std::endl;
+            clustersGui[k].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight() * row);
+            row++;
+            //                clustersGui[k].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight()*j);
+        }
+        
+        
+//        clustersGui[10].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight() * 0);
+        
+//        clustersGui[10].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight());
+//        clustersGui[11].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight());
+        
+    }
+    else
+    {
+        for (int i = 0; i < NUMCLUSTERS; i++)
+        {
+            clustersGui[i].gui.setPosition(0, clustersGui[i].gui.getHeight() * (i*3));
+        }
+    }
+    
+    
 }
 
 void ofApp::drawGui()
