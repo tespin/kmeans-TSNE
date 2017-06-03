@@ -204,6 +204,7 @@ void ofApp::initGui()
 
 void ofApp::setupGui()
 {
+    // specify column height here
     int columnHeight = 10;
     
     // set up every gui

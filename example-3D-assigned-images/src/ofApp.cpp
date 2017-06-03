@@ -211,7 +211,8 @@ void ofApp::initGui()
 
 void ofApp::setupGui()
 {
-    int columnHeight = 10;
+    // specify column height here
+    int columnHeight = 15;
     
     // set up every gui
     for (int i = 0; i < NUMCLUSTERS; i++)

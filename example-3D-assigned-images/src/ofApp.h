@@ -9,7 +9,7 @@
 #include "Element.h"
 
 #define NUMIMAGES 588
-#define NUMCLUSTERS 6
+#define NUMCLUSTERS 32
 
 //#define NUMIMAGES 512
 //#define NUMCLUSTERS 5
