@@ -211,18 +211,55 @@ void ofApp::initGui()
 
 void ofApp::setupGui()
 {
+    int columnHeight = 10;
+    
     // set up every gui
     for (int i = 0; i < NUMCLUSTERS; i++)
     {
         clustersGui[i].gui.setup();
         clustersGui[i].gui.setName("Cluster: " + ofToString(i+1));
-        
-        clustersGui[i].gui.setPosition(0, clustersGui[i].gui.getHeight() * (i*3));
         clustersGui[i].gui.add(clustersGui[i].drawImages.set("Draw Images", true));
         clustersGui[i].gui.add(clustersGui[i].drawPointCloud.set("Draw Point Cloud",true));
     }
+    
+    // if there are more clusters than can fit in one column
+    if (NUMCLUSTERS > columnHeight)
+    {
+        // use std::div to get a div_t columns
+        div_t columns = std::div (NUMCLUSTERS, columnHeight);
+        
+        // check if there is more than one column
+        // for there to be more than one, quotient and remainder must be greater than 0
+        // if quotient is 0, or if quot is 0 and remainder is 0, there is only 1 column
+        if (columns.quot > 0 && columns.rem > 0)
+        {
+            // confusing math
+            int column = 0;
+            int row = 1;
+            for (int i = 0; i < NUMCLUSTERS; i++)
+            {
+                clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * (row-1));
+                
+                // if it's not the last column, then there are 10 rows in each column
+                // else, if the last column, then the number of rows is equal to the total number of clusters subtracted by
+                int rowsInColumn = (column < (columns.quot)) ? columnHeight : (NUMCLUSTERS - (column*columnHeight));
+                
+                // if the current element is the last one in the column
+                if (i == ((columnHeight * (column+1))-1)) column++;
+                
+                if (row < rowsInColumn) row++;
+                else row = 1;
+            }
+        }
+    }
+    else
+    {
+        for (int i = 0; i < NUMCLUSTERS; i++)
+        {
+            clustersGui[i].gui.setPosition(0, clustersGui[i].gui.getHeight() * (i*3));
+        }
+    }
 }
-
 void ofApp::drawGui()
 {
     // draw each gui
