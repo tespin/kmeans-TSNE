@@ -30,7 +30,7 @@ void ofApp::setup()
 {
     ofSetVerticalSync(true);
     
-    string imageDir = "/Users/tespin/Documents/openFrameworks/apps/myApps/00_BatchFeatureEncoder/bin/data/image-set-a-scanner-darkly-2";
+    string imageDir = "";
     
     if (imageDir == "")
     {
@@ -204,9 +204,9 @@ void ofApp::initGui()
 
 void ofApp::setupGui()
 {
-    // set up every gui
     int columnHeight = 10;
     
+    // set up every gui
     for (int i = 0; i < NUMCLUSTERS; i++)
     {
         clustersGui[i].gui.setup();
@@ -215,31 +215,33 @@ void ofApp::setupGui()
         clustersGui[i].gui.add(clustersGui[i].drawPointCloud.set("Draw Point Cloud",true));
     }
     
+    // if there are more clusters than can fit in one column
     if (NUMCLUSTERS > columnHeight)
     {
-        int columnHeight = 10;
+        // use std::div to get a div_t columns
         div_t columns = std::div (NUMCLUSTERS, columnHeight);
         
+        // check if there is more than one column
+        // for there to be more than one, quotient and remainder must be greater than 0
+        // if quotient is 0, or if quot is 0 and remainder is 0, there is only 1 column
         if (columns.quot > 0 && columns.rem > 0)
         {
+            // confusing math
             int column = 0;
-            int row = 0;
+            int row = 1;
             for (int i = 0; i < NUMCLUSTERS; i++)
             {
-                clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * row);
+                clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * (row-1));
                 
-                if (i >= columnHeight * (column+1)) column++;
+                // if it's not the last column, then there are 10 rows in each column
+                // else, if the last column, then the number of rows is equal to the total number of clusters subtracted by
+                int rowsInColumn = (column < (columns.quot)) ? columnHeight : (NUMCLUSTERS - (column*columnHeight));
                 
-                int threshold = (column < (columns.quot)) ? columnHeight : (NUMCLUSTERS - (column*columnHeight));
+                // if the current element is the last one in the column
+                if (i == ((columnHeight * (column+1))-1)) column++;
                 
-                if (row < threshold) row++;
-                else row = 0;
-            
-//                for (int j = 0; j < threshold; j++)
-//                {
-//                    std::cout << "Cluster: " << ofToString(i) << ", Col: " << ofToString(column) << ", Row: " << ofToString(j) << std::endl;
-//                    clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * j);
-//                }
+                if (row < rowsInColumn) row++;
+                else row = 1;
             }
         }
     }
@@ -250,8 +252,6 @@ void ofApp::setupGui()
             clustersGui[i].gui.setPosition(0, clustersGui[i].gui.getHeight() * (i*3));
         }
     }
-    
-    
 }
 
 void ofApp::drawGui()

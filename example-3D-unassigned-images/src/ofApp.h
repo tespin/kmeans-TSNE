@@ -12,7 +12,7 @@
 //#define NUMCLUSTERS 12
 
 #define NUMIMAGES 512
-#define NUMCLUSTERS 24
+#define NUMCLUSTERS 5
 
 struct ClusterGui
 {
