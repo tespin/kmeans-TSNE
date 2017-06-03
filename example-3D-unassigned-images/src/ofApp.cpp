@@ -226,14 +226,13 @@ void ofApp::setupGui()
             for (int i = 0; i < NUMCLUSTERS; i++)
             {
                 if (i >= columnHeight * (column+1)) column++;
-                for (int j = 0; j < NUMCLUSTERS - (columnHeight * (column+1)); j++)
+                int threshold = (column < (columns.quot)) ? columnHeight : (NUMCLUSTERS - (column*columnHeight));
+                for (int j = 0; j < threshold; j++)
                 {
                     clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * j);
                 }
             }
-            
         }
-        
     }
     else
     {
