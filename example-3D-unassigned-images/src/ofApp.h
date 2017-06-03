@@ -12,13 +12,14 @@
 //#define NUMCLUSTERS 12
 
 #define NUMIMAGES 512
-#define NUMCLUSTERS 12
+#define NUMCLUSTERS 24
 
 struct ClusterGui
 {
     ofxPanel gui;
     ofParameter<bool> drawImages;
     ofParameter<bool> drawPointCloud;
+    int column;
     
 };
 

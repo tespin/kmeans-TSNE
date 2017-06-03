@@ -205,7 +205,7 @@ void ofApp::initGui()
 void ofApp::setupGui()
 {
     // set up every gui
-    int guiColumn = 10;
+    int columnHeight = 10;
     
     for (int i = 0; i < NUMCLUSTERS; i++)
     {
@@ -215,47 +215,24 @@ void ofApp::setupGui()
         clustersGui[i].gui.add(clustersGui[i].drawPointCloud.set("Draw Point Cloud",true));
     }
     
-    if (NUMCLUSTERS > guiColumn)
+    if (NUMCLUSTERS > columnHeight)
     {
-        int row = 0;
-        div_t columns = std::div (NUMCLUSTERS, guiColumn);
+        int columnHeight = 10;
+        div_t columns = std::div (NUMCLUSTERS, columnHeight);
         
-//        if (columns.rem > 0)
-//        {
-//            for (int j = 0; j < columns.quot+1; j++)
-//            {
-//                for (int k = 0; k < guiColumn; k++)
-//                {
-//                    clustersGui[k].gui.setPosition(0, clustersGui[k].gui.getHeight() * k);
-//                }
-//                
-//                for (int l = guiColumn; l < NUMCLUSTERS; l++)
-//                {
-//                    clustersGui[l].gui.setPosition(clustersGui[j].gui.getWidth(), clustersGui[0].gui.getHeight() * j);
-//                }
-//            }
-//        }
-        
-        for (int j = 0; j < guiColumn; j++)
+        if (columns.quot > 0 && columns.rem > 0)
         {
-            std::cout << "J value: " << ofToString(j) << std::endl;
-            clustersGui[j].gui.setPosition(0, clustersGui[j].gui.getHeight() * j);
+            int column = 0;
+            for (int i = 0; i < NUMCLUSTERS; i++)
+            {
+                if (i >= columnHeight * (column+1)) column++;
+                for (int j = 0; j < NUMCLUSTERS - (columnHeight * (column+1)); j++)
+                {
+                    clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * j);
+                }
+            }
             
         }
-        
-        for (int k = guiColumn; k < NUMCLUSTERS; k++)
-        {
-//            std::cout << "J value: " << ofToString(row) << std::endl;
-            clustersGui[k].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight() * row);
-            row++;
-            //                clustersGui[k].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight()*j);
-        }
-        
-        
-//        clustersGui[10].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight() * 0);
-        
-//        clustersGui[10].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight());
-//        clustersGui[11].gui.setPosition(clustersGui[0].gui.getWidth(), clustersGui[0].gui.getHeight());
         
     }
     else
