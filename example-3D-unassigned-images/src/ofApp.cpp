@@ -223,14 +223,23 @@ void ofApp::setupGui()
         if (columns.quot > 0 && columns.rem > 0)
         {
             int column = 0;
+            int row = 0;
             for (int i = 0; i < NUMCLUSTERS; i++)
             {
+                clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * row);
+                
                 if (i >= columnHeight * (column+1)) column++;
+                
                 int threshold = (column < (columns.quot)) ? columnHeight : (NUMCLUSTERS - (column*columnHeight));
-                for (int j = 0; j < threshold; j++)
-                {
-                    clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * j);
-                }
+                
+                if (row < threshold) row++;
+                else row = 0;
+            
+//                for (int j = 0; j < threshold; j++)
+//                {
+//                    std::cout << "Cluster: " << ofToString(i) << ", Col: " << ofToString(column) << ", Row: " << ofToString(j) << std::endl;
+//                    clustersGui[i].gui.setPosition(clustersGui[0].gui.getWidth() * column, clustersGui[0].gui.getHeight() * j);
+//                }
             }
         }
     }
