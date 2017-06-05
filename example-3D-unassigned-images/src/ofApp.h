@@ -14,6 +14,9 @@
 #define NUMIMAGES 512
 #define NUMCLUSTERS 5
 
+//#define NUMIMAGES 512
+//#define NUMCLUSTERS 25
+
 struct ClusterGui
 {
     ofxPanel gui;
