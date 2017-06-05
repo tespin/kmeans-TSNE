@@ -30,7 +30,7 @@ void ofApp::setup()
 {
     ofSetVerticalSync(true);
     
-    string imageDir = "";
+    string imageDir = "/Users/tespin/Documents/openFrameworks/apps/myApps/00_BatchFeatureEncoder/bin/data/image-set-a-scanner-darkly-2";
     
     if (imageDir == "")
     {
@@ -219,11 +219,12 @@ void ofApp::setupGui()
     {
         clustersGui[i].gui.setup();
         clustersGui[i].gui.setName("Cluster: " + ofToString(i+1));
+        
+//        clustersGui[i].gui.setPosition(0, clustersGui[i].gui.getHeight() * (i*3));
         clustersGui[i].gui.add(clustersGui[i].drawImages.set("Draw Images", true));
         clustersGui[i].gui.add(clustersGui[i].drawPointCloud.set("Draw Point Cloud",true));
     }
     
-    // if there are more clusters than can fit in one column
     if (NUMCLUSTERS > columnHeight)
     {
         // use std::div to get a div_t columns
@@ -257,10 +258,11 @@ void ofApp::setupGui()
     {
         for (int i = 0; i < NUMCLUSTERS; i++)
         {
-            clustersGui[i].gui.setPosition(0, clustersGui[i].gui.getHeight() * (i*3));
+            clustersGui[i].gui.setPosition(0, clustersGui[0].gui.getHeight() * i);
         }
     }
 }
+
 void ofApp::drawGui()
 {
     // draw each gui
