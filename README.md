@@ -1,4 +1,4 @@
-# ofxKMeans-TSNE
+# kmeans-TSNE
 A version of ofxTSNE using k-means clustering and containing examples with 3D embeddings.
 
 ## About
